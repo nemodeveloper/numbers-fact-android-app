@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Numbers</string>
+
+    <string name="play_market_app_http_link">https://play.google.com/store/apps/details?id=</string>
+    <string name="play_market_app_link">market://details?id=</string>
+    <string name="tell_about_app_title">Рассказать о приложении</string>
+
+    <!-- Реклама -->
+    <string name="ads_app_id">ca-app-pub-5449253846737836~3312376789</string>
+    <string name="device_id_test">7FE03AE2B40677A6643CDC9F76B378FC</string>
+
+    <string name="ads_simple_banner_id">ca-app-pub-5449253846737836/8259535410</string>
+    <string name="ads_simple_banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="ads_fullscreen_banner_id">ca-app-pub-5449253846737836/6488703104</string>
+    <string name="ads_fullscreen_banner_id_test">ca-app-pub-3940256099942544/1033173712</string>
+    <integer name="ads_fullscreen_banner_show_period">3</integer>
+
+    <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
+    <string name="enter_number_hint">Enter your number</string>
+    <string name="button_next_number_text">Next number</string>
+</resources>
