@@ -22,14 +22,14 @@ public class RetrofitFactory {
     private static final int WRITE_TIMEOUT = 10;
     private static final int READ_TIMEOUT = 10;
 
-    private static final String BASE_ENDPOINT = "http://numbersapi.com/";
+    private static final String BASE_ENDPOINT = "http://numbers-fact.ru/";
 
     private static final OkHttpClient OK_HTTP_CLIENT = createHttpClient();
 
-    private static final NumbersGateway numbersGateway = buildNumbersGateway();
+    private static final NumberFactGateway NUMBER_FACT_GATEWAY = buildNumbersGateway();
 
-    private static NumbersGateway buildNumbersGateway() {
-        return buildRetrofit(BASE_ENDPOINT).create(NumbersGateway.class);
+    private static NumberFactGateway buildNumbersGateway() {
+        return buildRetrofit(BASE_ENDPOINT).create(NumberFactGateway.class);
     }
 
     @NonNull
@@ -65,7 +65,7 @@ public class RetrofitFactory {
         return JacksonConverterFactory.create(objectMapper);
     }
 
-    public static NumbersGateway getNumbersGateway() {
-        return numbersGateway;
+    public static NumberFactGateway getNumberFactGateway() {
+        return NUMBER_FACT_GATEWAY;
     }
 }

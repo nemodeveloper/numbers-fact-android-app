@@ -31,7 +31,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "ru.nemodev.numbers"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -52,6 +52,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion = '28.0.3'
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
 }
 
 dependencies {
@@ -65,11 +70,15 @@ dependencies {
     // rxjava2
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    def paging_version = "2.1.0"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-rxjava2:$paging_version"
+
     // retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-jackson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 
     // room
     implementation 'androidx.room:room-runtime:2.2.0-rc01'
@@ -77,13 +86,13 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.0-rc01'
 
     // butterknife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
     // utils
-    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.3'
+    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.6'
     implementation 'org.apache.commons:commons-lang3:3.9'
-    implementation 'org.apache.commons:commons-collections4:4.3'
+    implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
 
     // system

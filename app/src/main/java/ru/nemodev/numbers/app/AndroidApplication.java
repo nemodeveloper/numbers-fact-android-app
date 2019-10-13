@@ -3,6 +3,7 @@ package ru.nemodev.numbers.app;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
+import ru.nemodev.numbers.repository.db.room.AppDataBase;
 
 
 public class AndroidApplication extends android.app.Application
@@ -14,6 +15,7 @@ public class AndroidApplication extends android.app.Application
     {
         super.onCreate();
         instance = this;
+        AppDataBase.getInstance();
 
         initFabricIO();
     }

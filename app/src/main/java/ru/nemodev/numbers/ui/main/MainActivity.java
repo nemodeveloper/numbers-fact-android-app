@@ -1,8 +1,8 @@
 package ru.nemodev.numbers.ui.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ru.nemodev.numbers.R;
 
@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, NumberInfoFragment.newInstance())
+                    .replace(R.id.container, NumberFactFragment.newInstance())
                     .commitNow();
         }
     }
