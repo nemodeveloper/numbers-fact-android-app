@@ -1,14 +1,10 @@
 package ru.nemodev.numbers.utils;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetManager;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -108,29 +104,6 @@ public final class AndroidUtils
         catch (Exception e)
         {
             LogUtils.error(LOG_TAG, "Ошибка при показе ShackBar сообщения!", e);
-        }
-    }
-
-    public static boolean addWidgetFromAppSupported(Context context)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            AppWidgetManager appWidgetManager = context.getSystemService(AppWidgetManager.class);
-            return appWidgetManager != null && appWidgetManager.isRequestPinAppWidgetSupported();
-        }
-        else
-            return false;
-    }
-
-    public static void openAddWidgetDialog(Context context, Class clazz)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                && addWidgetFromAppSupported(context))
-        {
-            AppWidgetManager appWidgetManager = context.getSystemService(AppWidgetManager.class);
-            ComponentName quoteWidgetProvider = new ComponentName(context, clazz);
-
-            appWidgetManager.requestPinAppWidget(quoteWidgetProvider, null, null);
         }
     }
 
