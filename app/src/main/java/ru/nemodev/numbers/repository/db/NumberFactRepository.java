@@ -1,4 +1,4 @@
-package ru.nemodev.numbers.repository.db.repository;
+package ru.nemodev.numbers.repository.db;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

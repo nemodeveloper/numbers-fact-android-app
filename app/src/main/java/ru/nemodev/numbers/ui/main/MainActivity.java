@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ru.nemodev.numbers.R;
+import ru.nemodev.numbers.ui.number.NumberFactFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override

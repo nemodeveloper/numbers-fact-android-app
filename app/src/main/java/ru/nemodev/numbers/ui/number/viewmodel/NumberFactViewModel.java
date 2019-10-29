@@ -1,6 +1,7 @@
-package ru.nemodev.numbers.ui.main.viewmodel;
+package ru.nemodev.numbers.ui.number.viewmodel;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.DataSource;
@@ -9,8 +10,8 @@ import androidx.paging.PagedList;
 
 import ru.nemodev.numbers.entity.NumberFact;
 import ru.nemodev.numbers.repository.db.room.AppDataBase;
-import ru.nemodev.numbers.ui.main.viewmodel.source.NumberFactDataSource;
-import ru.nemodev.numbers.ui.main.viewmodel.source.NumberFactRandomDataSource;
+import ru.nemodev.numbers.ui.number.viewmodel.source.NumberFactDataSource;
+import ru.nemodev.numbers.ui.number.viewmodel.source.NumberFactRandomDataSource;
 
 
 public class NumberFactViewModel extends ViewModel {
@@ -42,7 +43,11 @@ public class NumberFactViewModel extends ViewModel {
         return randomNumberFactList;
     }
 
-    public LiveData<PagedList<NumberFact>> getFact(final String number) {
+    public LiveData<PagedList<NumberFact>> getFact(LifecycleOwner lifecycleOwner, final String number) {
+
+        if (numberFactList != null) {
+            numberFactList.removeObservers(lifecycleOwner);
+        }
 
         DataSource.Factory<Integer, NumberFact> factFactory = new DataSource.Factory<Integer, NumberFact>() {
             @NonNull

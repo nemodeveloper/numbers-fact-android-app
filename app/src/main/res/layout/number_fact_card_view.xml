@@ -6,7 +6,7 @@
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:minHeight="150dp"
-    android:maxHeight="300dp"
+    android:maxHeight="400dp"
     android:layout_marginStart="10dp"
     card_view:cardElevation="4dp"
     card_view:cardCornerRadius="8dp">

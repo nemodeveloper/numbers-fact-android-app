@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import ru.nemodev.numbers.app.AndroidApplication;
 import ru.nemodev.numbers.entity.FactType;
 import ru.nemodev.numbers.entity.NumberFact;
-import ru.nemodev.numbers.repository.db.repository.NumberFactRepository;
+import ru.nemodev.numbers.repository.db.NumberFactRepository;
 
 
 @Database(entities = {NumberFact.class}, version = 1)

@@ -1,4 +1,4 @@
-package ru.nemodev.numbers.ui.main.adapter;
+package ru.nemodev.numbers.ui.number.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

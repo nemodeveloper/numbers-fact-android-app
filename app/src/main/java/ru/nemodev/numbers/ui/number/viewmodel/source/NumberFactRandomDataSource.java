@@ -1,10 +1,10 @@
-package ru.nemodev.numbers.ui.main.viewmodel.source;
+package ru.nemodev.numbers.ui.number.viewmodel.source;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
 import ru.nemodev.numbers.entity.NumberFact;
-import ru.nemodev.numbers.repository.db.repository.NumberFactRepository;
+import ru.nemodev.numbers.repository.db.NumberFactRepository;
 
 public class NumberFactRandomDataSource extends PositionalDataSource<NumberFact> {
 
