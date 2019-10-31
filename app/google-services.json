@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "363029703130",
+    "firebase_url": "https://number-fact-6e96d.firebaseio.com",
+    "project_id": "number-fact-6e96d",
+    "storage_bucket": "number-fact-6e96d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363029703130:android:1214b0cca8ab0706b578e3",
+        "android_client_info": {
+          "package_name": "ru.nemodev.number.fact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363029703130-nj897hmqo154cbgkvhu3b96mcinrm17t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwZ26acBoAXna19E8VB-Gjj8E3xl5BN3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363029703130-nj897hmqo154cbgkvhu3b96mcinrm17t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

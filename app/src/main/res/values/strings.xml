@@ -17,6 +17,10 @@
     <integer name="ads_fullscreen_banner_show_period">3</integer>
 
     <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
+
     <string name="enter_number_hint">Enter your number</string>
     <string name="button_next_number_text">Next number</string>
+    <string name="empty_input_number">Input your number!</string>
+    <string name="pull_up_input_number">Pull up if you are fed up with random facts</string>
+    <string name="pull_down_input_number">Pull down if you want some random facts</string>
 </resources>
