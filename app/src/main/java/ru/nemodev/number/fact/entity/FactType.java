@@ -2,8 +2,6 @@ package ru.nemodev.number.fact.entity;
 
 import androidx.room.TypeConverter;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 public enum FactType
 {
     TRIVIA,
@@ -12,7 +10,6 @@ public enum FactType
     MATH;
 
     @TypeConverter
-    @JsonCreator
     public static FactType toFactType(String factType) {
         return FactType.valueOf(factType.toUpperCase());
     }

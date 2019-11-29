@@ -1,28 +1,25 @@
 package ru.nemodev.number.fact.ui.number;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ru.nemodev.number.fact.R;
+import ru.nemodev.number.fact.databinding.RandomFactFragmentBinding;
 import ru.nemodev.number.fact.ui.main.OnBackPressedListener;
 import ru.nemodev.number.fact.ui.number.adapter.NumberFactAdapter;
 import ru.nemodev.number.fact.ui.number.viewmodel.NumberFactViewModel;
@@ -31,15 +28,7 @@ import ru.nemodev.number.fact.utils.AndroidUtils;
 
 public class NumberFactFragment extends Fragment implements OnBackPressedListener {
 
-    @BindView(R.id.rand_number_fact_rv) RecyclerView randomFactRV;
-    @BindView(R.id.contentLoadingProgressBar) ProgressBar progressBar;
-
-    @BindView(R.id.pull_view_title) TextView pullViewTitle;
-    @BindView(R.id.number_fact_rv) RecyclerView numberFactRV;
-    @BindView(R.id.number_info_input) EditText numberInfoInput;
-    @BindView(R.id.next_number_info) Button nextNumberInfoButton;
-
-    private SlidingUpPanelLayout root;
+    private RandomFactFragmentBinding binding;
     private NumberFactViewModel numberFactViewModel;
 
     public static NumberFactFragment newInstance() {
@@ -50,13 +39,10 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.random_fact_fragment, container, false);
+        numberFactViewModel = ViewModelProviders.of(this).get(NumberFactViewModel.class);
 
-        root = (SlidingUpPanelLayout) inflater.inflate(R.layout.random_fact_fragment, container, false);
-        ButterKnife.bind(this, root);
-
-        numberFactViewModel = ViewModelProviders.of(getActivity()).get(NumberFactViewModel.class);
-
-        root.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        binding.slidingUpPanel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) { }
 
@@ -65,43 +51,53 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                             SlidingUpPanelLayout.PanelState previousState,
                                             SlidingUpPanelLayout.PanelState newState) {
                 if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                    pullViewTitle.setText(R.string.pull_down_input_number);
+                    binding.pullViewTitle.setText(R.string.pull_down_input_number);
                 }
                 else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                    pullViewTitle.setText(R.string.pull_up_input_number);
+                    binding.pullViewTitle.setText(R.string.pull_up_input_number);
                 }
             }
         });
 
-        // random
-        NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(this.getContext());
-        randomFactRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        randomFactRV.setAdapter(randNumberFactAdapter);
+        // random facts
+        NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(getContext());
+        binding.randNumberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        binding.randNumberFactRv.setAdapter(randNumberFactAdapter);
         numberFactViewModel.getRandomFact().observe(this, randNumberFactAdapter::submitList);
 
-        // custom
+        // number facts
         NumberFactAdapter numberFactAdapter = new NumberFactAdapter(this.getContext());
-        numberFactRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        numberFactRV.setAdapter(numberFactAdapter);
+        binding.numberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        binding.numberFactRv.setAdapter(numberFactAdapter);
 
-        nextNumberInfoButton.setOnClickListener(v -> {
-            if (StringUtils.isNotEmpty(numberInfoInput.getText().toString())) {
-                numberFactViewModel.getFact(this, numberInfoInput.getText().toString())
-                        .observe(this, numberFactAdapter::submitList);
-            }
-            else {
-                AndroidUtils.showSnackBarMessage(root, R.string.empty_input_number);
+        // input number
+        binding.numberInfoInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (StringUtils.isNotEmpty(s.toString())) {
+                    numberFactViewModel.getFact(NumberFactFragment.this, s.toString())
+                            .observe(NumberFactFragment.this, numberFactAdapter::submitList);
+                }
+                else {
+                    AndroidUtils.showSnackBarMessage(binding.getRoot(), R.string.empty_input_number);
+                }
             }
         });
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
     public boolean onBackPressed() {
-        if (root.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED
-                || root.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED) {
-            root.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        if (binding.slidingUpPanel.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED
+                || binding.slidingUpPanel.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED) {
+            binding.slidingUpPanel.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             return true;
         }
         return false;

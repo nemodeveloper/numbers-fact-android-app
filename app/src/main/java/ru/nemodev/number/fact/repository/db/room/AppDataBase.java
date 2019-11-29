@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -25,7 +26,6 @@ import java.util.stream.Collectors;
 import ru.nemodev.number.fact.app.AndroidApplication;
 import ru.nemodev.number.fact.entity.FactType;
 import ru.nemodev.number.fact.entity.NumberFact;
-import ru.nemodev.number.fact.repository.db.NumberFactRepository;
 
 
 @Database(entities = {NumberFact.class}, version = 1)
@@ -62,34 +62,56 @@ public abstract class AppDataBase extends RoomDatabase
     }
 
     private static void populate() {
-        Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            try {
-                InputStream inputStream = AndroidApplication.getInstance().getAssets().open("numbers.json");
-                int size = inputStream.available();
-                byte[] buffer = new byte[size];
-                inputStream.read(buffer);
-                inputStream.close();
-                String jsonData = new String(buffer, StandardCharsets.UTF_8);
+        Executors.newSingleThreadScheduledExecutor().execute(AppDataBase::fromMock);
+    }
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    private static void fromFile() {
+        try {
+            InputStream inputStream = AndroidApplication.getInstance().getAssets().open("numbers.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            String jsonData = new String(buffer, StandardCharsets.UTF_8);
 
-                List<NumberFact> numberFacts = objectMapper.readValue(jsonData, new TypeReference<List<NumberFact>>() {});
-                numberFacts = numberFacts.stream()
-                        .filter(numberFact -> StringUtils.isNotEmpty(numberFact.getNumber()))
-                        .peek(numberFact -> {
-                            numberFact.setId(UUID.randomUUID().toString());
-                            if (numberFact.getFactType() == null) {
-                                numberFact.setFactType(FactType.TRIVIA);
-                            }
-                        })
-                        .collect(Collectors.toList());
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-                getInstance().getNumberFactRepository().add(numberFacts);
+            List<NumberFact> numberFacts = objectMapper.readValue(jsonData, new TypeReference<List<NumberFact>>() {});
+            numberFacts = numberFacts.stream()
+                    .filter(numberFact -> StringUtils.isNotEmpty(numberFact.getNumber()))
+                    .peek(numberFact -> {
+                        numberFact.setId(UUID.randomUUID().toString());
+                        if (numberFact.getFactType() == null) {
+                            numberFact.setFactType(FactType.TRIVIA);
+                        }
+                    })
+                    .collect(Collectors.toList());
 
-            } catch (Exception e) {
-                Log.e("DataBaseMigration", "error populate db", e);
-            }
-        });
+            getInstance().getNumberFactRepository().add(numberFacts);
+
+        } catch (Exception e) {
+            Log.e("DataBaseMigration", "error populate db from file", e);
+        }
+    }
+
+    // TODO временное решение для теста
+    private static void fromMock() {
+        List<NumberFact> numberFacts = new ArrayList<>();
+        for (int i = 0; i < 10; ++i) {
+            numberFacts.add(numberFact(String.valueOf(1), "test fact " + i));
+        }
+
+        getInstance().getNumberFactRepository().add(numberFacts);
+    }
+
+    private static NumberFact numberFact(String number, String factText) {
+        NumberFact numberFact = new NumberFact();
+        numberFact.setId(UUID.randomUUID().toString());
+        numberFact.setNumber(number);
+        numberFact.setText(factText);
+        numberFact.setFactType(FactType.TRIVIA);
+
+        return numberFact;
     }
 }
