@@ -9,6 +9,7 @@ import androidx.room.TypeConverters;
 
 
 // TODO добавить тип создания + добавить локаль текста + добавить локализацию приложения
+// TODO добавить возможность создавать свои факты + добавить фильтрацию по ним
 @Entity(tableName = "numbers_fact",
         indices = {
                 @Index("number")

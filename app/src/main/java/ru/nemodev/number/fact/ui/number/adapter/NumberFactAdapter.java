@@ -63,7 +63,8 @@ public class NumberFactAdapter extends PagedListAdapter<NumberFact, NumberFactAd
 
         public void bind(NumberFact numberFact) {
 
-            // TODO добавить кнопку поделиться + добавить отрисовку типа факта
+            // TODO Добавить кнопку поделиться/скопировать + добавить отрисовку типа факта
+            // TODO При клике на карточку показывать все факты по этому числу
 
             String result = numberFact.getNumber() + " is " + numberFact.getText();
             numberInfoText.setText(AndroidUtils.getColoredString(

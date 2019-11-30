@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         // TODO интеграция рекламы
+        // TODO использовать навигацию
 
         updateAppViewModel = ViewModelProviders.of(this, new UpdateAppViewModelFactory(this)).get(UpdateAppViewModel.class);
         updateAppViewModel.getUpdateAppEvent().observe(this, installState -> showUpdateDialog());

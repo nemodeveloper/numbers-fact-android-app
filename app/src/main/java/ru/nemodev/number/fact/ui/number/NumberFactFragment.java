@@ -53,9 +53,11 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                             SlidingUpPanelLayout.PanelState newState) {
                 if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
                     binding.pullViewTitle.setText(R.string.pull_down_input_number);
+                    // TODO устаналивать фокус на ввод числа
                 }
                 else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
                     binding.pullViewTitle.setText(R.string.pull_up_input_number);
+                    // TODO убирать фокус на ввод числа
                 }
             }
         });
