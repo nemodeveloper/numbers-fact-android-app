@@ -62,7 +62,7 @@ public abstract class AppDataBase extends RoomDatabase
     }
 
     private static void populate() {
-        Executors.newSingleThreadScheduledExecutor().execute(AppDataBase::fromMock);
+        Executors.newSingleThreadScheduledExecutor().execute(AppDataBase::fromFile);
     }
 
     private static void fromFile() {

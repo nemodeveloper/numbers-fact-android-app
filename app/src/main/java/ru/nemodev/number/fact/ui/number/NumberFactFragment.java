@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import ru.nemodev.number.fact.R;
@@ -82,7 +83,14 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
             public void afterTextChanged(Editable s) {
                 if (StringUtils.isNotEmpty(s.toString())) {
                     numberFactViewModel.getFact(NumberFactFragment.this, s.toString())
-                            .observe(NumberFactFragment.this, numberFactAdapter::submitList);
+                            .observe(NumberFactFragment.this, numberFacts -> {
+                                if (CollectionUtils.isEmpty(numberFacts)) {
+                                    AndroidUtils.showSnackBarMessage(binding.getRoot(), String.format(
+                                            AndroidUtils.getString(R.string.number_facts_not_found),
+                                            binding.numberInfoInput.getText().toString()));
+                                }
+                                numberFactAdapter.submitList(numberFacts);
+                            });
                 }
                 else {
                     AndroidUtils.showSnackBarMessage(binding.getRoot(), R.string.empty_input_number);

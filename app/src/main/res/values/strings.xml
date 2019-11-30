@@ -6,13 +6,13 @@
     <string name="tell_about_app_title">Рассказать о приложении</string>
 
     <!-- Реклама -->
-    <string name="ads_app_id">ca-app-pub-5449253846737836~3312376789</string>
+    <string name="ads_app_id">ca-app-pub-5449253846737836~7330066586</string>
     <string name="device_id_test">7FE03AE2B40677A6643CDC9F76B378FC</string>
 
-    <string name="ads_simple_banner_id">ca-app-pub-5449253846737836/8259535410</string>
+    <string name="ads_simple_banner_id">ca-app-pub-5449253846737836/3181231724</string>
     <string name="ads_simple_banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
 
-    <string name="ads_fullscreen_banner_id">ca-app-pub-5449253846737836/6488703104</string>
+    <string name="ads_fullscreen_banner_id">ca-app-pub-5449253846737836/7858843332</string>
     <string name="ads_fullscreen_banner_id_test">ca-app-pub-3940256099942544/1033173712</string>
     <integer name="ads_fullscreen_banner_show_period">3</integer>
 
@@ -27,5 +27,6 @@
     <string name="app_update_ready_title">App ready for update</string>
     <string name="app_update_yes">Update</string>
     <string name="app_update_no">Not now</string>
+    <string name="number_facts_not_found">For number %s not found facts</string>
 
 </resources>
