@@ -1,6 +1,7 @@
 package ru.nemodev.number.fact.app;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.fabric.sdk.android.Fabric;
 import ru.nemodev.number.fact.repository.db.room.AppDataBase;
@@ -15,6 +16,7 @@ public class AndroidApplication extends android.app.Application
     {
         super.onCreate();
         instance = this;
+
         Fabric.with(this, new Crashlytics());
         AppDataBase.getInstance();
     }
@@ -25,4 +27,7 @@ public class AndroidApplication extends android.app.Application
         return instance;
     }
 
+    public static FirebaseAnalytics getAnalytics() {
+        return FirebaseAnalytics.getInstance(getInstance());
+    }
 }
