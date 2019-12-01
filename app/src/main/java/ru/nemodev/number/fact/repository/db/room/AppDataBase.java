@@ -24,6 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import ru.nemodev.number.fact.app.AndroidApplication;
+import ru.nemodev.number.fact.entity.CreationType;
 import ru.nemodev.number.fact.entity.FactType;
 import ru.nemodev.number.fact.entity.NumberFact;
 
@@ -82,6 +83,7 @@ public abstract class AppDataBase extends RoomDatabase
                     .filter(numberFact -> StringUtils.isNotEmpty(numberFact.getNumber()))
                     .peek(numberFact -> {
                         numberFact.setId(UUID.randomUUID().toString());
+                        numberFact.setCreationType(CreationType.EXTERNAL);
                         if (numberFact.getFactType() == null) {
                             numberFact.setFactType(FactType.TRIVIA);
                         }

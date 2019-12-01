@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 
-// TODO добавить тип создания + добавить локаль текста + добавить локализацию приложения
+// TODO добавить локаль текста + добавить локализацию приложения
 // TODO добавить возможность создавать свои факты + добавить фильтрацию по ним
 @Entity(tableName = "numbers_fact",
         indices = {
@@ -32,6 +32,11 @@ public class NumberFact {
     @NonNull
     @TypeConverters(FactType.class)
     private FactType factType;
+
+    @ColumnInfo(name = "creation_type")
+    @NonNull
+    @TypeConverters(CreationType.class)
+    private CreationType creationType;
 
     @ColumnInfo(name = "fact_date")
     private String factDate;
@@ -69,6 +74,15 @@ public class NumberFact {
 
     public void setFactType(FactType factType) {
         this.factType = factType;
+    }
+
+    @NonNull
+    public CreationType getCreationType() {
+        return creationType;
+    }
+
+    public void setCreationType(@NonNull CreationType creationType) {
+        this.creationType = creationType;
     }
 
     public String getFactDate() {

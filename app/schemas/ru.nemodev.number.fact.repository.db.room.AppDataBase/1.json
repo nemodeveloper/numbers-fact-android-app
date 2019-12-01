@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b617499b5df8a3a0c860e2aaacf7419f",
+    "identityHash": "e1b197bd02aa918ce3061b752d50823a",
     "entities": [
       {
         "tableName": "numbers_fact",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `number` TEXT NOT NULL, `text` TEXT NOT NULL, `fact_type` TEXT NOT NULL, `fact_date` TEXT, `fact_year` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `number` TEXT NOT NULL, `text` TEXT NOT NULL, `fact_type` TEXT NOT NULL, `creation_type` TEXT NOT NULL, `fact_date` TEXT, `fact_year` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -29,6 +29,12 @@
           {
             "fieldPath": "factType",
             "columnName": "fact_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "creationType",
+            "columnName": "creation_type",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -67,7 +73,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b617499b5df8a3a0c860e2aaacf7419f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e1b197bd02aa918ce3061b752d50823a')"
     ]
   }
 }

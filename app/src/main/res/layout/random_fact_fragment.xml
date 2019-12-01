@@ -64,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/pull_view_title"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     android:maxLength="20"
                     android:hint="@string/enter_number_hint"
                     android:layout_marginStart="10dp"

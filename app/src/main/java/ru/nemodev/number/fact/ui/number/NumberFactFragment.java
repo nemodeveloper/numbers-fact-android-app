@@ -1,11 +1,13 @@
 package ru.nemodev.number.fact.ui.number;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,18 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
         binding = DataBindingUtil.inflate(inflater, R.layout.random_fact_fragment, container, false);
         numberFactViewModel = ViewModelProviders.of(this).get(NumberFactViewModel.class);
 
+        binding.numberInfoInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (getActivity() != null && !getActivity().isFinishing()) {
+                InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (keyboard != null) {
+                    if (hasFocus)
+                        keyboard.showSoftInput(binding.numberInfoInput, 0);
+                    else
+                        keyboard.hideSoftInputFromWindow(binding.numberInfoInput.getWindowToken(), 0);
+                }
+            }
+        });
+
         binding.slidingUpPanel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) { }
@@ -53,11 +67,11 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                             SlidingUpPanelLayout.PanelState newState) {
                 if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
                     binding.pullViewTitle.setText(R.string.pull_down_input_number);
-                    // TODO устаналивать фокус на ввод числа
+                    binding.numberInfoInput.requestFocus();
                 }
                 else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
                     binding.pullViewTitle.setText(R.string.pull_up_input_number);
-                    // TODO убирать фокус на ввод числа
+                    binding.numberInfoInput.clearFocus();
                 }
             }
         });
