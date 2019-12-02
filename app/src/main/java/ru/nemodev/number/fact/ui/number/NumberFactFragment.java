@@ -27,14 +27,17 @@ import io.reactivex.schedulers.Schedulers;
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.analytic.AnalyticUtils;
 import ru.nemodev.number.fact.databinding.NumberFactFragmentBinding;
+import ru.nemodev.number.fact.entity.NumberFact;
 import ru.nemodev.number.fact.ui.main.OnBackPressedListener;
 import ru.nemodev.number.fact.ui.number.adapter.NumberFactAdapter;
+import ru.nemodev.number.fact.ui.number.adapter.OnNumberCardActionListener;
 import ru.nemodev.number.fact.ui.number.viewmodel.NumberFactViewModel;
 import ru.nemodev.number.fact.ui.observable.RxEditTextObservable;
 import ru.nemodev.number.fact.utils.AndroidUtils;
+import ru.nemodev.number.fact.utils.NumberFactUtils;
 
 
-public class NumberFactFragment extends Fragment implements OnBackPressedListener {
+public class NumberFactFragment extends Fragment implements OnBackPressedListener, OnNumberCardActionListener {
 
     private NumberFactFragmentBinding binding;
     private NumberFactViewModel numberFactViewModel;
@@ -84,13 +87,13 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
         });
 
         // random facts
-        NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(getContext());
+        NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(getContext(), this);
         binding.randNumberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         binding.randNumberFactRv.setAdapter(randNumberFactAdapter);
         numberFactViewModel.getRandomFact().observe(this, randNumberFactAdapter::submitList);
 
         // number facts
-        NumberFactAdapter numberFactAdapter = new NumberFactAdapter(this.getContext());
+        NumberFactAdapter numberFactAdapter = new NumberFactAdapter(this.getContext(), this);
         binding.numberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         binding.numberFactRv.setAdapter(numberFactAdapter);
 
@@ -132,4 +135,18 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
         return false;
     }
 
+    @Override
+    public void onCopyClick(NumberFact numberFact) {
+        AnalyticUtils.shareEvent(AnalyticUtils.ShareType.NUMBER_FACT_COPY, numberFact.getNumber());
+        AndroidUtils.copyTextToClipBoard(NumberFactUtils.getVerboseFactText(numberFact));
+        AndroidUtils.showSnackBarMessage(binding.getRoot(), R.string.number_fact_action_copy);
+    }
+
+    @Override
+    public void onShareClick(NumberFact numberFact) {
+        AnalyticUtils.shareEvent(AnalyticUtils.ShareType.NUMBER_FACT, numberFact.getNumber());
+        AndroidUtils.openShareDialog(getActivity(),
+                AndroidUtils.getString(R.string.share_number_fact_dialog_title),
+                NumberFactUtils.getVerboseFactText(numberFact));
+    }
 }

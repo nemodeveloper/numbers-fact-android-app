@@ -3,18 +3,16 @@ package ru.nemodev.number.fact.ui.number.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.nemodev.number.fact.R;
+import ru.nemodev.number.fact.databinding.NumberFactCardViewBinding;
 import ru.nemodev.number.fact.entity.NumberFact;
-import ru.nemodev.number.fact.utils.AndroidUtils;
 
 
 public class NumberFactAdapter extends PagedListAdapter<NumberFact, NumberFactAdapter.NumberFactViewHolder> {
@@ -32,45 +30,34 @@ public class NumberFactAdapter extends PagedListAdapter<NumberFact, NumberFactAd
     };
 
     private final Context context;
+    private final OnNumberCardActionListener onNumberCardActionListener;
 
-    public NumberFactAdapter(Context context) {
+    public NumberFactAdapter(Context context, OnNumberCardActionListener onNumberCardActionListener) {
         super(DIFF_CALLBACK);
         this.context = context;
+        this.onNumberCardActionListener = onNumberCardActionListener;
     }
 
     @NonNull
     @Override
     public NumberFactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new NumberFactViewHolder(
-                (CardView)  LayoutInflater.from(context).inflate(
-                        R.layout.number_fact_card_view, parent, false), context);
+                DataBindingUtil.inflate(LayoutInflater.from(context),
+                        R.layout.number_fact_card_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull NumberFactViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        holder.binding.setOnNumberCardActionListener(onNumberCardActionListener);
+        holder.binding.setNumberFact(getItem(position));
     }
 
     public static class NumberFactViewHolder extends RecyclerView.ViewHolder {
-        private final Context context;
-        private final TextView numberInfoText;
+        private final NumberFactCardViewBinding binding;
 
-        public NumberFactViewHolder(@NonNull CardView itemCardView, Context context) {
-            super(itemCardView);
-            this.context = context;
-            this.numberInfoText = itemCardView.findViewById(R.id.number_info_text);
-        }
-
-        public void bind(NumberFact numberFact) {
-
-            // TODO Добавить кнопку поделиться/скопировать + добавить отрисовку типа факта
-            // TODO При клике на карточку показывать все факты по этому числу
-
-            String result = numberFact.getNumber() + " is " + numberFact.getText();
-            numberInfoText.setText(AndroidUtils.getColoredString(
-                    result,
-                    0, numberFact.getNumber().length(),
-                    ContextCompat.getColor(context, R.color.colorPrimary)));
+        public NumberFactViewHolder(NumberFactCardViewBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

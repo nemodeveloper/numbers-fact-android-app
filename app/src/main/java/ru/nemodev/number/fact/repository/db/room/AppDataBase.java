@@ -63,7 +63,7 @@ public abstract class AppDataBase extends RoomDatabase
     }
 
     private static void populate() {
-        Executors.newSingleThreadScheduledExecutor().execute(AppDataBase::fromFile);
+        Executors.newSingleThreadScheduledExecutor().execute(AppDataBase::fromMock);
     }
 
     private static void fromFile() {
@@ -101,7 +101,7 @@ public abstract class AppDataBase extends RoomDatabase
     private static void fromMock() {
         List<NumberFact> numberFacts = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
-            numberFacts.add(numberFact(String.valueOf(1), "test fact " + i));
+            numberFacts.add(numberFact(String.valueOf(1), "It is amazing number!"));
         }
 
         getInstance().getNumberFactRepository().add(numberFacts);
@@ -113,6 +113,7 @@ public abstract class AppDataBase extends RoomDatabase
         numberFact.setNumber(number);
         numberFact.setText(factText);
         numberFact.setFactType(FactType.TRIVIA);
+        numberFact.setCreationType(CreationType.EXTERNAL);
 
         return numberFact;
     }

@@ -2,6 +2,8 @@ package ru.nemodev.number.fact.utils;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -111,5 +113,16 @@ public final class AndroidUtils
         Spannable spannable = new SpannableString(text);
         spannable.setSpan(new ForegroundColorSpan(color), startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
+    }
+
+    public static boolean copyTextToClipBoard(String text) {
+        ClipboardManager clipboard = (ClipboardManager) AndroidApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            ClipData clip = ClipData.newPlainText(getString(R.string.app_name), text);
+            clipboard.setPrimaryClip(clip);
+            return true;
+        }
+
+        return false;
     }
 }

@@ -19,7 +19,33 @@ public final class AnalyticUtils {
         }
     }
 
+    public static void shareEvent(ShareType shareType, String number) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, shareType.name());
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, shareType.getTypeName());
+        bundle.putString(FirebaseAnalytics.Param.VALUE, number);
+
+        AndroidApplication.getAnalytics().logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+    }
+
     public enum SearchType {
         NUMBER_FACT
+    }
+
+    public enum ShareType {
+        NUMBER_FACT("Поделиться фактом"),
+        NUMBER_FACT_COPY("Копирование факта");
+
+        private final String typeName;
+
+        ShareType(String typeName)
+        {
+            this.typeName = typeName;
+        }
+
+        public String getTypeName()
+        {
+            return typeName;
+        }
     }
 }

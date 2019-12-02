@@ -16,6 +16,7 @@
     <string name="ads_fullscreen_banner_id_test">ca-app-pub-3940256099942544/1033173712</string>
     <integer name="ads_fullscreen_banner_show_period">3</integer>
 
+    <!--  View number fact screen  -->
     <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
 
     <string name="enter_number_hint">Enter your number</string>
@@ -24,9 +25,14 @@
     <string name="pull_up_input_number">Pull up if you are fed up with <font color='#0CA4A5'>random facts</font></string>
     <string name="pull_down_input_number">Pull down if you want some <font color='#0CA4A5'>random facts</font></string>
 
+    <string name="number_facts_not_found">For number %s not found facts</string>
+
+    <string name="share_number_fact_dialog_title">Share number fact</string>
+    <string name="number_fact_action_copy">Number fact copy</string>
+
+    <!--  Update app  -->
     <string name="app_update_ready_title">App ready for update</string>
     <string name="app_update_yes">Update</string>
     <string name="app_update_no">Not now</string>
-    <string name="number_facts_not_found">For number %s not found facts</string>
 
 </resources>
