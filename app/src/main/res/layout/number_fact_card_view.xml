@@ -33,7 +33,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/fact_text_size"
                             android:textStyle="bold"
                             binding:formatFactText="@{numberFact}"/>
                 </RelativeLayout>
@@ -52,7 +52,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp"
+                                    android:textSize="@dimen/fact_text_size"
                                     android:textColor="@color/colorPrimary"
                                     android:text="@{numberFact.factType.name()}"/>
                         </RelativeLayout>
@@ -63,8 +63,8 @@
                             android:layout_alignParentEnd="true">
                                 <ImageView
                                     android:id="@+id/copyFact"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="@dimen/card_action_size"
+                                    android:layout_height="@dimen/card_action_size"
                                     android:layout_centerVertical="true"
                                     android:src="@android:drawable/ic_popup_reminder"
                                     android:background="@null"
@@ -72,8 +72,8 @@
                                     android:onClick="@{() -> onNumberCardActionListener.onCopyClick(numberFact)}"/>
                                 <ImageView
                                     android:id="@+id/shareFact"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="@dimen/card_action_size"
+                                    android:layout_height="@dimen/card_action_size"
                                     android:layout_centerVertical="true"
                                     android:src="@android:drawable/ic_popup_reminder"
                                     android:background="@null"

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -15,7 +14,7 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:background="@color/mainBackground"
-            app:umanoPanelHeight="75dp"
+            app:umanoPanelHeight="95dp"
             app:umanoShadowHeight="5dp">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -47,12 +46,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/drawable_round_background">
                 <TextView
                     android:id="@+id/pull_view_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp"
                     android:textColor="@android:color/black"
                     android:text="@string/pull_up_input_number"
@@ -64,6 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/pull_view_title"
                     android:inputType="number"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/montserrat_bold"
                     android:imeOptions="actionDone"
                     android:maxLength="20"
                     android:hint="@string/enter_number_hint"
