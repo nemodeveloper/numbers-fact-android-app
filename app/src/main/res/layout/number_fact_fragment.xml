@@ -1,65 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ru.nemodev.number.fact.ui.number.NumberFactFragment"
-    android:background="@color/mainBackground">
+<layout>
+    <data>
 
-    <RelativeLayout
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/pull_view_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:textColor="@android:color/black"
-            android:text="@string/pull_up_input_number"
-            android:textSize="24sp"
-            android:fontFamily="@font/montserrat_bold"/>
-
-        <RelativeLayout
+        <com.sothree.slidinguppanel.SlidingUpPanelLayout
+            android:id="@+id/sliding_up_panel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/pull_view_title"
-            android:layout_marginTop="60dp">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/number_fact_rv"
+            android:gravity="bottom"
+            android:background="@color/mainBackground"
+            app:umanoPanelHeight="75dp"
+            app:umanoShadowHeight="5dp">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            </androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="@string/app_title"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/montserrat_bold"/>
+                <RelativeLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/title"
+                    android:layout_marginTop="10dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rand_number_fact_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom">
-            <EditText
-                android:id="@+id/number_info_input"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLength="20"
-                android:hint="@string/enter_number_hint" />
-            <Button
-                android:id="@+id/next_number_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_below="@+id/number_info_input"
-                android:textSize="16sp"
-                android:text="@string/button_next_number_text"/>
-        </RelativeLayout>
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/pull_view_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="@string/pull_up_input_number"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/montserrat_bold"/>
+                <EditText
+                    android:id="@+id/number_info_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pull_view_title"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:maxLength="20"
+                    android:hint="@string/enter_number_hint"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/number_info_input"
+                    android:layout_marginTop="10dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/number_fact_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+            </RelativeLayout>
 
-    </RelativeLayout>
+        </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

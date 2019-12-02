@@ -26,7 +26,7 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.schedulers.Schedulers;
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.analytic.AnalyticUtils;
-import ru.nemodev.number.fact.databinding.RandomFactFragmentBinding;
+import ru.nemodev.number.fact.databinding.NumberFactFragmentBinding;
 import ru.nemodev.number.fact.ui.main.OnBackPressedListener;
 import ru.nemodev.number.fact.ui.number.adapter.NumberFactAdapter;
 import ru.nemodev.number.fact.ui.number.viewmodel.NumberFactViewModel;
@@ -36,7 +36,7 @@ import ru.nemodev.number.fact.utils.AndroidUtils;
 
 public class NumberFactFragment extends Fragment implements OnBackPressedListener {
 
-    private RandomFactFragmentBinding binding;
+    private NumberFactFragmentBinding binding;
     private NumberFactViewModel numberFactViewModel;
 
     public static NumberFactFragment newInstance() {
@@ -47,7 +47,7 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.random_fact_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.number_fact_fragment, container, false);
         numberFactViewModel = ViewModelProviders.of(this).get(NumberFactViewModel.class);
 
         // show/hide keyboard for input
