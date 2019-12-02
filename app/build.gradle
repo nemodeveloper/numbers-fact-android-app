@@ -54,7 +54,6 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -126,6 +125,9 @@ dependencies {
 
     implementation 'androidx.databinding:databinding-runtime:3.5.2'
     implementation 'androidx.databinding:databinding-adapters:3.5.2'
+
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
 
     implementation "com.google.android.play:core:1.6.4"
 

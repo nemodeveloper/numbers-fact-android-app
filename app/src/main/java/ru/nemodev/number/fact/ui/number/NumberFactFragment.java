@@ -42,10 +42,6 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
     private NumberFactFragmentBinding binding;
     private NumberFactViewModel numberFactViewModel;
 
-    public static NumberFactFragment newInstance() {
-        return new NumberFactFragment();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

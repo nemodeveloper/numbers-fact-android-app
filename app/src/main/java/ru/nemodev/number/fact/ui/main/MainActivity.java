@@ -4,37 +4,37 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import ru.nemodev.number.fact.R;
+import ru.nemodev.number.fact.databinding.MainActivityBinding;
 import ru.nemodev.number.fact.ui.main.viewmodel.UpdateAppViewModel;
 import ru.nemodev.number.fact.ui.main.viewmodel.UpdateAppViewModelFactory;
-import ru.nemodev.number.fact.ui.number.NumberFactFragment;
 import ru.nemodev.number.fact.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
+    private MainActivityBinding binding;
     private UpdateAppViewModel updateAppViewModel;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
         // TODO интеграция рекламы
-        // TODO использовать навигацию
 
         updateAppViewModel = ViewModelProviders.of(this, new UpdateAppViewModelFactory(this)).get(UpdateAppViewModel.class);
         updateAppViewModel.getUpdateAppEvent().observe(this, installState -> showUpdateDialog());
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, NumberFactFragment.newInstance())
-                    .commitNow();
-        }
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
     }
 
     @Override
