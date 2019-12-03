@@ -1,6 +1,7 @@
 package ru.nemodev.number.fact.ui.number;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,20 +63,32 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
             }
         });
 
-        // update pull title
+        // update pull view
         binding.slidingUpPanel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+
+            private SlidingUpPanelLayout.PanelState lastPanelState = SlidingUpPanelLayout.PanelState.COLLAPSED;
+
             @Override
-            public void onPanelSlide(View panel, float slideOffset) { }
+            public void onPanelSlide(View panel, float slideOffset) {
+                if (getActivity() != null) {
+                    getActivity().getWindow().setStatusBarColor(
+                            lastPanelState == SlidingUpPanelLayout.PanelState.COLLAPSED
+                                    ? Color.WHITE
+                                    : getResources().getColor(R.color.mainBackground, null));
+                }
+            }
 
             @Override
             public void onPanelStateChanged(View panel,
                                             SlidingUpPanelLayout.PanelState previousState,
                                             SlidingUpPanelLayout.PanelState newState) {
                 if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                    lastPanelState = newState;
                     binding.pullViewTitle.setText(R.string.pull_down_input_number);
                     binding.numberInfoInput.requestFocus();
                 }
                 else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                    lastPanelState = newState;
                     binding.pullViewTitle.setText(R.string.pull_up_input_number);
                     binding.numberInfoInput.clearFocus();
                 }
@@ -140,9 +153,11 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
 
     @Override
     public void onShareClick(NumberFact numberFact) {
-        AnalyticUtils.shareEvent(AnalyticUtils.ShareType.NUMBER_FACT, numberFact.getNumber());
-        AndroidUtils.openShareDialog(getActivity(),
-                AndroidUtils.getString(R.string.share_number_fact_dialog_title),
-                NumberFactUtils.getVerboseFactText(numberFact));
+        if (getActivity() != null) {
+            AnalyticUtils.shareEvent(AnalyticUtils.ShareType.NUMBER_FACT, numberFact.getNumber());
+            AndroidUtils.openShareDialog(getActivity(),
+                    AndroidUtils.getString(R.string.share_number_fact_dialog_title),
+                    NumberFactUtils.getVerboseFactText(numberFact));
+        }
     }
 }

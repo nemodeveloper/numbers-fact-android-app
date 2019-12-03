@@ -9,6 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.List;
 
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.databinding.MainActivityBinding;
@@ -41,8 +46,15 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         Fragment currentFragment = getSupportFragmentManager().getFragments().get(0);
         boolean needCallSuper = true;
-        if (currentFragment instanceof OnBackPressedListener) {
-            needCallSuper = !((OnBackPressedListener) currentFragment).onBackPressed();
+        if (currentFragment instanceof NavHostFragment) {
+            NavHostFragment navHostFragment = (NavHostFragment) currentFragment;
+            List<Fragment> currentFragments = navHostFragment.getChildFragmentManager().getFragments();
+            if (CollectionUtils.isNotEmpty(currentFragments)) {
+                Fragment fragment = currentFragments.get(0);
+                if (fragment instanceof OnBackPressedListener) {
+                    needCallSuper = !((OnBackPressedListener) fragment).onBackPressed();
+                }
+            }
         }
 
         if (needCallSuper) {

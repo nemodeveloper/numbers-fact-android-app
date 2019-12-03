@@ -45,16 +45,25 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/pull_view_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/drawable_round_background">
+                <RelativeLayout
+                    android:id="@+id/pull_view_header_line"
+                    android:layout_width="60dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/pull_view_header_line"/>
                 <TextView
                     android:id="@+id/pull_view_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_below="@+id/pull_view_header_line"
                     android:textColor="@android:color/black"
                     android:text="@string/pull_up_input_number"
                     android:textSize="24sp"
