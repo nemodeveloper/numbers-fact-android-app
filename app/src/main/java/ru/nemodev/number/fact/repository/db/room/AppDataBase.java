@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -95,26 +94,5 @@ public abstract class AppDataBase extends RoomDatabase
         } catch (Exception e) {
             Log.e("DataBaseMigration", "error populate db from file", e);
         }
-    }
-
-    // TODO временное решение для теста
-    private static void fromMock() {
-        List<NumberFact> numberFacts = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
-            numberFacts.add(numberFact(String.valueOf(1), "It is amazing number!"));
-        }
-
-        getInstance().getNumberFactRepository().add(numberFacts);
-    }
-
-    private static NumberFact numberFact(String number, String factText) {
-        NumberFact numberFact = new NumberFact();
-        numberFact.setId(UUID.randomUUID().toString());
-        numberFact.setNumber(number);
-        numberFact.setText(factText);
-        numberFact.setFactType(FactType.TRIVIA);
-        numberFact.setCreationType(CreationType.EXTERNAL);
-
-        return numberFact;
     }
 }
