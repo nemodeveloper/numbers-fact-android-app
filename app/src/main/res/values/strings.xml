@@ -1,34 +1,33 @@
 <resources>
+
+    <!--  Приложение  -->
     <string name="app_name">Numbers</string>
 
-    <string name="play_market_app_http_link">https://play.google.com/store/apps/details?id=</string>
-    <string name="play_market_app_link">market://details?id=</string>
-    <string name="tell_about_app_title">Рассказать о приложении</string>
+    <string name="play_market_app_http_link" translatable="false">https://play.google.com/store/apps/details?id=</string>
+    <string name="play_market_app_link" translatable="false">market://details?id=</string>
+    <string name="tell_about_app_title">Share app link</string>
 
     <!-- Реклама -->
-    <string name="ads_app_id">ca-app-pub-5449253846737836~7330066586</string>
-    <string name="device_id_test">7FE03AE2B40677A6643CDC9F76B378FC</string>
+    <string name="ads_app_id" translatable="false">ca-app-pub-5449253846737836~7330066586</string>
+    <string name="device_id_test" translatable="false">7FE03AE2B40677A6643CDC9F76B378FC</string>
 
-    <string name="ads_simple_banner_id">ca-app-pub-5449253846737836/3181231724</string>
-    <string name="ads_simple_banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ads_simple_banner_id" translatable="false">ca-app-pub-5449253846737836/3181231724</string>
+    <string name="ads_simple_banner_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
 
-    <string name="ads_fullscreen_banner_id">ca-app-pub-5449253846737836/7858843332</string>
-    <string name="ads_fullscreen_banner_id_test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ads_fullscreen_banner_id" translatable="false">ca-app-pub-5449253846737836/7858843332</string>
+    <string name="ads_fullscreen_banner_id_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <integer name="ads_fullscreen_banner_show_period">3</integer>
 
     <!--  View number fact screen  -->
     <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
 
+    <string name="pull_up_input_number">Pull up if you are <font color='#0CA4A5'>fed up</font> with random facts</string>
     <string name="enter_number_hint">Enter your number</string>
-    <string name="button_next_number_text">Next number</string>
-    <string name="empty_input_number">Input your number!</string>
-    <string name="pull_up_input_number">Pull up if you are fed up with <font color='#0CA4A5'>random facts</font></string>
-    <string name="pull_down_input_number">Pull down if you want some <font color='#0CA4A5'>random facts</font></string>
-
+    <string name="empty_input_number">Input your number</string>
     <string name="number_facts_not_found">For number %s not found facts</string>
-
     <string name="share_number_fact_dialog_title">Share number fact</string>
-    <string name="number_fact_action_copy">Number fact copy</string>
+    <string name="number_fact_action_copy">Copied</string>
+    <string name="pull_down_input_number">Pull down if you want some <font color='#0CA4A5'>random facts</font></string>
 
     <!--  Update app  -->
     <string name="app_update_ready_title">App ready for update</string>
