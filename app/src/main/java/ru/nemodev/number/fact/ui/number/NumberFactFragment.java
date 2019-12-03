@@ -76,6 +76,10 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                     ? Color.WHITE
                                     : getResources().getColor(R.color.mainBackground, null));
                 }
+                binding.pullViewHeaderLine.setVisibility(
+                        lastPanelState == SlidingUpPanelLayout.PanelState.COLLAPSED
+                        ? View.GONE
+                        : View.VISIBLE);
             }
 
             @Override

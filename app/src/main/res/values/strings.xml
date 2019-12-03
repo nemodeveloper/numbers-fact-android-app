@@ -1,7 +1,7 @@
 <resources>
 
     <!--  Приложение  -->
-    <string name="app_name">Numbers</string>
+    <string name="app_name">Number facts</string>
 
     <string name="play_market_app_http_link" translatable="false">https://play.google.com/store/apps/details?id=</string>
     <string name="play_market_app_link" translatable="false">market://details?id=</string>
