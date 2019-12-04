@@ -21,7 +21,6 @@ public class AndroidApplication extends android.app.Application
         AppDataBase.getInstance();
     }
 
-
     public static AndroidApplication getInstance()
     {
         return instance;

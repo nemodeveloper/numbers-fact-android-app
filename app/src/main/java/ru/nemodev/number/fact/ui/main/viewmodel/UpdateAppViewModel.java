@@ -17,7 +17,7 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 public class UpdateAppViewModel extends ViewModel {
 
     private final MutableLiveData<InstallState> updateAppEvent;
-    private AppUpdateManager appUpdateManager;
+    private final AppUpdateManager appUpdateManager;
     private final Activity activity;
 
     public UpdateAppViewModel(Activity activity) {

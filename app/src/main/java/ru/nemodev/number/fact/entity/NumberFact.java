@@ -37,6 +37,7 @@ public class NumberFact {
     @TypeConverters(CreationType.class)
     private CreationType creationType;
 
+    // TODO выводить эту информацию на карточку
     @ColumnInfo(name = "fact_date")
     private String factDate;
 

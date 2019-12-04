@@ -40,8 +40,8 @@ public class NumberFactViewModel extends ViewModel {
                 AppDataBase.getInstance().getNumberFactRepository().getByNumber(number),
                 new PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
-                        .setPageSize(10)
-                        .setPrefetchDistance(10)
+                        .setPageSize(50)
+                        .setPrefetchDistance(25)
                         .build())
                 .build();
 
