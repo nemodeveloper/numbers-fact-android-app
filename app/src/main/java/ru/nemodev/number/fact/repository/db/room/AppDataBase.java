@@ -31,7 +31,7 @@ import ru.nemodev.number.fact.entity.NumberFact;
 @Database(entities = {NumberFact.class}, version = 1)
 public abstract class AppDataBase extends RoomDatabase
 {
-    private static final String DATA_BASE_NAME = "numbers-fact.db";
+    private static final String DATA_BASE_NAME = "number-facts.db";
 
     private static volatile AppDataBase instance;
 
