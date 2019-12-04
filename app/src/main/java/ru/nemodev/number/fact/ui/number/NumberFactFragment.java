@@ -95,6 +95,15 @@ public class NumberFactFragment extends BaseFragment implements OnBackPressedLis
                     binding.pullViewTitle.setText(R.string.pull_up_input_number);
                     binding.numberInfoInput.clearFocus();
                 }
+
+                if (getActivity() != null) {
+                    if (lastPanelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.mainBackground, null));
+                    }
+                    else if (lastPanelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                        getActivity().getWindow().setStatusBarColor(Color.WHITE);
+                    }
+                }
             }
         });
 
