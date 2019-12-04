@@ -34,4 +34,6 @@
     <string name="app_update_yes">Update</string>
     <string name="app_update_no">Not now</string>
 
+    <string name="load_message">Loading…</string>
+
 </resources>

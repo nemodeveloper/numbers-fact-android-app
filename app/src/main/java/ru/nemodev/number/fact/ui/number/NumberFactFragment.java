@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +28,7 @@ import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.analytic.AnalyticUtils;
 import ru.nemodev.number.fact.databinding.NumberFactFragmentBinding;
 import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.ui.base.BaseFragment;
 import ru.nemodev.number.fact.ui.main.OnBackPressedListener;
 import ru.nemodev.number.fact.ui.number.adapter.NumberFactAdapter;
 import ru.nemodev.number.fact.ui.number.adapter.OnNumberCardActionListener;
@@ -38,7 +38,7 @@ import ru.nemodev.number.fact.utils.AndroidUtils;
 import ru.nemodev.number.fact.utils.NumberFactUtils;
 
 
-public class NumberFactFragment extends Fragment implements OnBackPressedListener, OnNumberCardActionListener {
+public class NumberFactFragment extends BaseFragment implements OnBackPressedListener, OnNumberCardActionListener {
 
     private NumberFactFragmentBinding binding;
     private NumberFactViewModel numberFactViewModel;
@@ -47,8 +47,11 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         binding = DataBindingUtil.inflate(inflater, R.layout.number_fact_fragment, container, false);
         numberFactViewModel = ViewModelProviders.of(this).get(NumberFactViewModel.class);
+
+        showLoader();
 
         // show/hide keyboard for input
         binding.numberInfoInput.setOnFocusChangeListener((v, hasFocus) -> {
@@ -76,10 +79,6 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                     ? Color.WHITE
                                     : getResources().getColor(R.color.mainBackground, null));
                 }
-                binding.pullViewHeaderLine.setVisibility(
-                        lastPanelState == SlidingUpPanelLayout.PanelState.COLLAPSED
-                        ? View.GONE
-                        : View.VISIBLE);
             }
 
             @Override
@@ -103,7 +102,8 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
         NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(getContext(), this);
         binding.randNumberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         binding.randNumberFactRv.setAdapter(randNumberFactAdapter);
-        numberFactViewModel.getRandomFact().observe(this, randNumberFactAdapter::submitList);
+        numberFactViewModel.getRandomFact().observe(this,
+                numberFacts -> randNumberFactAdapter.submitList(numberFacts, this::hideLoader));
 
         // number facts
         NumberFactAdapter numberFactAdapter = new NumberFactAdapter(this.getContext(), this);
@@ -119,6 +119,7 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                         .toFlowable(BackpressureStrategy.BUFFER))
                 .observe(this, inputNumber -> {
                     if (StringUtils.isNotEmpty(inputNumber)) {
+                        showLoader();
                         numberFactViewModel.getFact(NumberFactFragment.this, inputNumber)
                                 .observe(NumberFactFragment.this, numberFacts -> {
                                     AnalyticUtils.searchEvent(AnalyticUtils.SearchType.NUMBER_FACT, inputNumber);
@@ -127,6 +128,7 @@ public class NumberFactFragment extends Fragment implements OnBackPressedListene
                                                 AndroidUtils.getString(R.string.number_facts_not_found),
                                                 binding.numberInfoInput.getText().toString()));
                                     }
+                                    hideLoader();
                                     numberFactAdapter.submitList(numberFacts);
                                 });
                     }

@@ -69,7 +69,7 @@
                                     android:layout_width="@dimen/card_action_size"
                                     android:layout_height="@dimen/card_action_size"
                                     android:layout_centerVertical="true"
-                                    android:src="@android:drawable/ic_popup_reminder"
+                                    android:src="@drawable/ic_copy"
                                     android:background="@null"
                                     android:layout_marginEnd="16dp"
                                     android:onClick="@{() -> onNumberCardActionListener.onCopyClick(numberFact)}"/>
@@ -78,7 +78,7 @@
                                     android:layout_width="@dimen/card_action_size"
                                     android:layout_height="@dimen/card_action_size"
                                     android:layout_centerVertical="true"
-                                    android:src="@android:drawable/ic_popup_reminder"
+                                    android:src="@drawable/ic_share"
                                     android:background="@null"
                                     android:layout_toEndOf="@id/copyFact"
                                     android:onClick="@{() -> onNumberCardActionListener.onShareClick(numberFact)}"/>
