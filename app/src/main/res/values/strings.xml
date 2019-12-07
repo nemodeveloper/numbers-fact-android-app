@@ -18,6 +18,10 @@
     <string name="ads_fullscreen_banner_id_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <integer name="ads_fullscreen_banner_show_period">3</integer>
 
+    <string name="adb_disable_dialog_title">Disable ads</string>
+    <string name="adb_disable_dialog_positive">Disable</string>
+    <string name="adb_disable_dialog_neutral">Not now</string>
+
     <!--  View number fact screen  -->
     <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
 

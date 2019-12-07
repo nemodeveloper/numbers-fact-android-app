@@ -1,4 +1,4 @@
-package ru.nemodev.number.fact.ui.main.viewmodel;
+package ru.nemodev.number.fact.ui.main.viewmodel.update_app;
 
 import android.app.Activity;
 import android.content.IntentSender;

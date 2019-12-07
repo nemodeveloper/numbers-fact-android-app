@@ -17,8 +17,10 @@ import java.util.List;
 
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.databinding.MainActivityBinding;
-import ru.nemodev.number.fact.ui.main.viewmodel.UpdateAppViewModel;
-import ru.nemodev.number.fact.ui.main.viewmodel.UpdateAppViewModelFactory;
+import ru.nemodev.number.fact.ui.main.viewmodel.ads.AdsViewModel;
+import ru.nemodev.number.fact.ui.main.viewmodel.ads.AdsViewModelFactory;
+import ru.nemodev.number.fact.ui.main.viewmodel.update_app.UpdateAppViewModel;
+import ru.nemodev.number.fact.ui.main.viewmodel.update_app.UpdateAppViewModelFactory;
 import ru.nemodev.number.fact.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityBinding binding;
     private UpdateAppViewModel updateAppViewModel;
+    private AdsViewModel adsViewModel;
     private NavController navController;
 
     @Override
@@ -34,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
-        // TODO интеграция рекламы
+        adsViewModel = ViewModelProviders.of(this, new AdsViewModelFactory(this)).get(AdsViewModel.class);
+        adsViewModel.getOnFullscreenBannerCloseEvent().observe(this, aBoolean -> {});
 
         updateAppViewModel = ViewModelProviders.of(this, new UpdateAppViewModelFactory(this)).get(UpdateAppViewModel.class);
         updateAppViewModel.getUpdateAppEvent().observe(this, installState -> showUpdateDialog());
@@ -76,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
             catch (Exception e) {
                 LogUtils.error(LOG_TAG, "Ошибка показа диалога обновления приложения!", e);
             }
+        }
+    }
+
+    private void showDisableAdsDialog() {
+        if (isFinishing())
+            return;
+
+        try {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.adb_disable_dialog_title)
+                    // TODO реализация отключения рекламы
+                    .setPositiveButton(R.string.adb_disable_dialog_positive, (dialog, which) -> { })
+                    .setNeutralButton(R.string.adb_disable_dialog_neutral, (dialog, which) -> {})
+                    .setCancelable(true)
+                    .create()
+                    .show();
+        }
+        catch (Exception e) {
+            LogUtils.error(LOG_TAG, "Ошибка показа диалога отключения рекламы!", e);
         }
     }
 }

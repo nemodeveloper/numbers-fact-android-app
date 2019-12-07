@@ -18,8 +18,7 @@ import ru.nemodev.number.fact.utils.AndroidUtils;
 import ru.nemodev.number.fact.utils.LogUtils;
 
 
-public class FullscreenBanner implements AdsBanner
-{
+public class FullscreenBanner implements AdsBanner {
     private static final String LOG_TAG = FullscreenBanner.class.getSimpleName();
 
     private final Context context;
@@ -29,21 +28,18 @@ public class FullscreenBanner implements AdsBanner
     private PublisherInterstitialAd fullScreenBanner;
     private Disposable fullScreenBannerDisposable;
 
-    public FullscreenBanner(Context context, OnAdsListener onAdsListener, int showPeriodMinute)
-    {
+    public FullscreenBanner(Context context, OnAdsListener onAdsListener, int showPeriodMinute) {
         this.context = context;
         this.onAdsListener = onAdsListener;
         this.showPeriodMinute = showPeriodMinute;
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
         if (fullScreenBanner != null)
             return;
 
-        try
-        {
+        try {
             fullScreenBanner = new PublisherInterstitialAd(context);
             fullScreenBanner.setAdUnitId(BuildConfig.DEBUG
                     ? AndroidUtils.getString(R.string.ads_fullscreen_banner_id_test)
@@ -66,15 +62,13 @@ public class FullscreenBanner implements AdsBanner
 
             loadNewFullscreenBanner();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             LogUtils.error(LOG_TAG, "Ошибка инициализации полноэкранного баннера!", e);
         }
     }
 
     @Override
-    public void hide()
-    {
+    public void hide() {
         try
         {
             if (fullScreenBannerDisposable != null && !fullScreenBannerDisposable.isDisposed())
@@ -88,31 +82,24 @@ public class FullscreenBanner implements AdsBanner
         }
     }
 
-    private void showFullScreenBanner()
-    {
-        if (fullScreenBanner.isLoaded())
-        {
+    private void showFullScreenBanner() {
+        if (fullScreenBanner.isLoaded()) {
             fullScreenBanner.show();
         }
-        else
-        {
+        else {
             loadNewFullscreenBanner();
         }
     }
 
-    private void loadNewFullscreenBanner()
-    {
-        if (!fullScreenBanner.isLoaded())
-        {
+    private void loadNewFullscreenBanner() {
+        if (!fullScreenBanner.isLoaded()) {
             fullScreenBanner.loadAd(buildAdRequest());
         }
     }
 
-    private PublisherAdRequest buildAdRequest()
-    {
+    private PublisherAdRequest buildAdRequest() {
         PublisherAdRequest.Builder builder = new PublisherAdRequest.Builder();
-        if (BuildConfig.DEBUG)
-        {
+        if (BuildConfig.DEBUG) {
             builder.addTestDevice(AndroidUtils.getString(R.string.device_id_test));
         }
 
