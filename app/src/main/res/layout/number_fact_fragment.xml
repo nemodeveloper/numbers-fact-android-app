@@ -79,7 +79,7 @@
                     android:textSize="24sp"
                     android:fontFamily="@font/montserrat_bold"
                     android:imeOptions="actionDone"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:hint="@string/enter_number_hint"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"/>
