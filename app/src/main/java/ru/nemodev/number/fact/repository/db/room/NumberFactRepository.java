@@ -9,7 +9,7 @@ import androidx.room.Transaction;
 
 import java.util.List;
 
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 
 @Dao
 public interface NumberFactRepository {

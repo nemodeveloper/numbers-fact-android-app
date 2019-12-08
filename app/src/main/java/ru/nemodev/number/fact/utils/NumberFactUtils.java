@@ -2,7 +2,7 @@ package ru.nemodev.number.fact.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 
 public final class NumberFactUtils {
 

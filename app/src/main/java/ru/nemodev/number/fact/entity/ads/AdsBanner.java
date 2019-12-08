@@ -1,4 +1,4 @@
-package ru.nemodev.number.fact.ads;
+package ru.nemodev.number.fact.entity.ads;
 
 public interface AdsBanner
 {

@@ -23,9 +23,9 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import ru.nemodev.number.fact.app.AndroidApplication;
-import ru.nemodev.number.fact.entity.CreationType;
-import ru.nemodev.number.fact.entity.FactType;
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.CreationType;
+import ru.nemodev.number.fact.entity.number.FactType;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 
 
 @Database(entities = {NumberFact.class}, version = 1)

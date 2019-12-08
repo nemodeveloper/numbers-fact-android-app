@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter;
 
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.app.AndroidApplication;
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 import ru.nemodev.number.fact.utils.AndroidUtils;
 import ru.nemodev.number.fact.utils.NumberFactUtils;
 

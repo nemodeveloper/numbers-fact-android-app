@@ -7,6 +7,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import org.apache.commons.lang3.StringUtils;
 
 import ru.nemodev.number.fact.app.AndroidApplication;
+import ru.nemodev.number.fact.entity.purchase.PurchaseItem;
 
 public final class AnalyticUtils {
 
@@ -26,6 +27,17 @@ public final class AnalyticUtils {
         bundle.putString(FirebaseAnalytics.Param.VALUE, number);
 
         AndroidApplication.getAnalytics().logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+    }
+
+    public static void purchaseEvent(PurchaseItem purchaseItem) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, purchaseItem.getPurchaseType().getSku());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, purchaseItem.getTitle());
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, purchaseItem.getPurchaseType().getItemType());
+        bundle.putString(FirebaseAnalytics.Param.PRICE, purchaseItem.getPrice());
+        bundle.putString(FirebaseAnalytics.Param.CURRENCY, purchaseItem.getCurrency().toString());
+
+        AndroidApplication.getAnalytics().logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, bundle);
     }
 
     public enum SearchType {

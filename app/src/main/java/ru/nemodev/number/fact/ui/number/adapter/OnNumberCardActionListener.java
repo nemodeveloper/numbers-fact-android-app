@@ -1,6 +1,6 @@
 package ru.nemodev.number.fact.ui.number.adapter;
 
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 
 
 public interface OnNumberCardActionListener {

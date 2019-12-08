@@ -5,7 +5,7 @@
                 alias="NumberFactUtils"/>
         <variable
             name="numberFact"
-            type="ru.nemodev.number.fact.entity.NumberFact" />
+            type="ru.nemodev.number.fact.entity.number.NumberFact" />
         <variable
             name="onNumberCardActionListener"
             type="ru.nemodev.number.fact.ui.number.adapter.OnNumberCardActionListener" />

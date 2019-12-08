@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.databinding.NumberFactCardViewBinding;
-import ru.nemodev.number.fact.entity.NumberFact;
+import ru.nemodev.number.fact.entity.number.NumberFact;
 
 
 public class NumberFactAdapter extends PagedListAdapter<NumberFact, NumberFactAdapter.NumberFactViewHolder> {

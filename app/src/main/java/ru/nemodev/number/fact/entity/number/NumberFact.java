@@ -1,4 +1,4 @@
-package ru.nemodev.number.fact.entity;
+package ru.nemodev.number.fact.entity.number;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

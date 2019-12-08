@@ -17,10 +17,13 @@ import java.util.List;
 
 import ru.nemodev.number.fact.R;
 import ru.nemodev.number.fact.databinding.MainActivityBinding;
+import ru.nemodev.number.fact.entity.purchase.PurchaseType;
 import ru.nemodev.number.fact.ui.main.viewmodel.ads.AdsViewModel;
 import ru.nemodev.number.fact.ui.main.viewmodel.ads.AdsViewModelFactory;
 import ru.nemodev.number.fact.ui.main.viewmodel.update_app.UpdateAppViewModel;
 import ru.nemodev.number.fact.ui.main.viewmodel.update_app.UpdateAppViewModelFactory;
+import ru.nemodev.number.fact.ui.purchase.viewmodel.PurchaseViewModel;
+import ru.nemodev.number.fact.ui.purchase.viewmodel.PurchaseViewModelFactory;
 import ru.nemodev.number.fact.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityBinding binding;
     private UpdateAppViewModel updateAppViewModel;
     private AdsViewModel adsViewModel;
+    private PurchaseViewModel purchaseViewModel;
     private NavController navController;
 
     @Override
@@ -38,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
         adsViewModel = ViewModelProviders.of(this, new AdsViewModelFactory(this)).get(AdsViewModel.class);
-        adsViewModel.getOnFullscreenBannerCloseEvent().observe(this, aBoolean -> {});
+        adsViewModel.getOnFullscreenBannerCloseEvent().observe(this, aBoolean -> showDisableAdsDialog());
+
+        purchaseViewModel = ViewModelProviders.of(this, new PurchaseViewModelFactory(this)).get(PurchaseViewModel.class);
+        purchaseViewModel.purchaseList.observe(this, purchaseItems -> purchaseViewModel.checkPurchase());
+        purchaseViewModel.onAdsByEvent.observe(this, aBoolean -> adsViewModel.onAdsBuyEvent(aBoolean));
+        purchaseViewModel.onPurchaseEvent.observe(this, purchase -> adsViewModel.onBuyEvent(purchase));
 
         updateAppViewModel = ViewModelProviders.of(this, new UpdateAppViewModelFactory(this)).get(UpdateAppViewModel.class);
         updateAppViewModel.getUpdateAppEvent().observe(this, installState -> showUpdateDialog());
@@ -90,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.adb_disable_dialog_title)
-                    // TODO реализация отключения рекламы
-                    .setPositiveButton(R.string.adb_disable_dialog_positive, (dialog, which) -> { })
+                    .setPositiveButton(R.string.adb_disable_dialog_positive, (dialog, which) -> purchaseViewModel.buy(PurchaseType.ADS))
                     .setNeutralButton(R.string.adb_disable_dialog_neutral, (dialog, which) -> {})
                     .setCancelable(true)
                     .create()
