@@ -1,4 +1,4 @@
-package ru.nemodev.number.fact.analytic;
+package ru.nemodev.number.fact.app.analytic;
 
 import android.os.Bundle;
 

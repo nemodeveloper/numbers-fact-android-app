@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.schedulers.Schedulers;
 import ru.nemodev.number.fact.R;
-import ru.nemodev.number.fact.analytic.AnalyticUtils;
+import ru.nemodev.number.fact.app.analytic.AnalyticUtils;
 import ru.nemodev.number.fact.databinding.NumberFactFragmentBinding;
 import ru.nemodev.number.fact.entity.NumberFact;
 import ru.nemodev.number.fact.ui.base.BaseFragment;

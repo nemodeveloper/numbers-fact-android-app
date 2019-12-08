@@ -11,6 +11,9 @@ import java.util.Arrays;
 import ru.nemodev.number.fact.ads.AdsBanner;
 import ru.nemodev.number.fact.ads.BannerManager;
 import ru.nemodev.number.fact.ads.FullscreenBanner;
+import ru.nemodev.number.fact.app.config.AdsConfig;
+import ru.nemodev.number.fact.app.config.FirebaseConfig;
+
 
 public class AdsViewModel extends ViewModel implements AdsBanner.OnAdsListener {
     private final Activity activity;
@@ -22,7 +25,8 @@ public class AdsViewModel extends ViewModel implements AdsBanner.OnAdsListener {
         this.onFullscreenBannerCloseEvent = new MutableLiveData<>();
 
         this.bannerManager = new BannerManager(activity, Arrays.asList(
-                new FullscreenBanner(activity, this, 3)
+                new FullscreenBanner(activity, this,
+                        FirebaseConfig.getInteger(AdsConfig.FULLSCREEN_BANNER_SHOW_PERIOD_MIN))
         ));
     }
 

@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "363029703130-daqlauq5ab9a80kfp0cfvuipeskto01p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.nemodev.number.fact",
+            "certificate_hash": "b306b5464b8e9f8292766e737a0d97e93540bcda"
+          }
+        },
+        {
+          "client_id": "363029703130-nu38dpoe7bavbrtv1jaflbng3tscp71e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.nemodev.number.fact",
+            "certificate_hash": "00b81c8ca495d441778a2ec5bb1111b19c66a845"
+          }
+        },
+        {
           "client_id": "363029703130-nj897hmqo154cbgkvhu3b96mcinrm17t.apps.googleusercontent.com",
           "client_type": 3
         }
