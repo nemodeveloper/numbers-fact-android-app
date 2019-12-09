@@ -3,7 +3,7 @@
 <defaultsMap>
     <entry>
         <key>fullscreen_banner_show_period_sec</key>
-        <value>2</value>
+        <value>120</value>
     </entry>
 </defaultsMap>
 <!-- END xml_defaults -->
