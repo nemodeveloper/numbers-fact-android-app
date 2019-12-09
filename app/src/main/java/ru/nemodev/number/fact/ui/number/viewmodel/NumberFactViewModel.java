@@ -12,22 +12,22 @@ import ru.nemodev.number.fact.repository.db.room.AppDataBase;
 
 public class NumberFactViewModel extends ViewModel {
 
-    private LiveData<PagedList<NumberFact>> randomNumberFactList;
+    public final LiveData<Integer> numberFactsCount;
+    public final LiveData<PagedList<NumberFact>> randomNumberFactList;
+
     private LiveData<PagedList<NumberFact>> numberFactList;
 
-    public LiveData<PagedList<NumberFact>> getRandomFact() {
-        if (randomNumberFactList == null) {
-            randomNumberFactList = new LivePagedListBuilder<>(
-                    AppDataBase.getInstance().getNumberFactRepository().getRandom(),
-                    new PagedList.Config.Builder()
+    public NumberFactViewModel() {
+        numberFactsCount = AppDataBase.getInstance().getNumberFactRepository().getCount();
+        randomNumberFactList = new LivePagedListBuilder<>(
+                AppDataBase.getInstance().getNumberFactRepository().getRandom(),
+                new PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(100)
                         .setPageSize(50)
                         .setPrefetchDistance(25)
                         .build())
                 .build();
-        }
-
-        return randomNumberFactList;
     }
 
     public LiveData<PagedList<NumberFact>> getFact(LifecycleOwner lifecycleOwner, final String number) {
@@ -46,5 +46,11 @@ public class NumberFactViewModel extends ViewModel {
                 .build();
 
         return numberFactList;
+    }
+
+    public void refreshRandom() {
+        if (randomNumberFactList.getValue() != null) {
+            randomNumberFactList.getValue().getDataSource().invalidate();
+        }
     }
 }

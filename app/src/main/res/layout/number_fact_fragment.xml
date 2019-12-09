@@ -16,34 +16,40 @@
             android:background="@color/mainBackground"
             app:umanoPanelHeight="95dp"
             app:umanoShadowHeight="5dp">
-            <RelativeLayout
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/title_margin"
-                    android:layout_marginStart="@dimen/title_margin"
-                    android:layout_marginEnd="@dimen/title_margin"
-                    android:textColor="@android:color/black"
-                    android:text="@string/app_title"
-                    android:textSize="24sp"
-                    android:fontFamily="@font/montserrat_bold"/>
                 <RelativeLayout
-                    android:id="@+id/content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/title"
-                    android:layout_marginTop="10dp">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rand_number_fact_rv"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/title_margin"
+                        android:layout_marginStart="@dimen/title_margin"
+                        android:layout_marginEnd="@dimen/title_margin"
+                        android:textColor="@android:color/black"
+                        android:text="@string/app_title"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_bold"/>
+                    <RelativeLayout
+                        android:id="@+id/content"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:layout_below="@+id/title"
+                        android:layout_marginTop="10dp">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rand_number_fact_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </RelativeLayout>
                 </RelativeLayout>
-            </RelativeLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <RelativeLayout
                 android:id="@+id/pull_view_content"

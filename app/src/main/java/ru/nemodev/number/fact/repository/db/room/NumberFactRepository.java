@@ -1,5 +1,6 @@
 package ru.nemodev.number.fact.repository.db.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -25,5 +26,8 @@ public interface NumberFactRepository {
     @Transaction
     @Query("SELECT * FROM numbers_fact WHERE number = :number")
     DataSource.Factory<Integer, NumberFact> getByNumber(String number);
+
+    @Query("SELECT COUNT(*) FROM numbers_fact")
+    LiveData<Integer> getCount();
 
 }

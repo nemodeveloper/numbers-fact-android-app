@@ -3,6 +3,7 @@ package ru.nemodev.number.fact.ui.number;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ import ru.nemodev.number.fact.ui.number.viewmodel.NumberFactViewModel;
 import ru.nemodev.number.fact.ui.observable.RxEditTextObservable;
 import ru.nemodev.number.fact.utils.AndroidUtils;
 import ru.nemodev.number.fact.utils.NumberFactUtils;
+
+import static android.text.Html.FROM_HTML_MODE_LEGACY;
 
 
 public class NumberFactFragment extends BaseFragment implements OnBackPressedListener, OnNumberCardActionListener {
@@ -111,13 +114,30 @@ public class NumberFactFragment extends BaseFragment implements OnBackPressedLis
         NumberFactAdapter randNumberFactAdapter = new NumberFactAdapter(getContext(), this);
         binding.randNumberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         binding.randNumberFactRv.setAdapter(randNumberFactAdapter);
-        numberFactViewModel.getRandomFact().observe(this,
-                numberFacts -> randNumberFactAdapter.submitList(numberFacts, this::hideLoader));
+        numberFactViewModel.randomNumberFactList.observe(this,
+                numberFacts -> randNumberFactAdapter.submitList(numberFacts, () -> {
+                    hideLoader();
+                    if (binding.swipeRefresh.isRefreshing()) {
+                        binding.swipeRefresh.setRefreshing(false);
+                        binding.randNumberFactRv.scrollToPosition(0);
+                    }
+                }));
+
+        // refresh random content
+        binding.swipeRefresh.setOnRefreshListener(() -> numberFactViewModel.refreshRandom());
 
         // number facts
         NumberFactAdapter numberFactAdapter = new NumberFactAdapter(this.getContext(), this);
         binding.numberFactRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         binding.numberFactRv.setAdapter(numberFactAdapter);
+
+        // update app title
+        numberFactViewModel.numberFactsCount.observe(this, count -> {
+            if (count != null && count > 0) {
+                String title = AndroidUtils.getString(R.string.app_title_with_count_facts, count);
+                binding.title.setText(Html.fromHtml(title, FROM_HTML_MODE_LEGACY));
+            }
+        });
 
         // input number event
         LiveDataReactiveStreams.fromPublisher(

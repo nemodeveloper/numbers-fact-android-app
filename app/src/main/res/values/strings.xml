@@ -24,6 +24,7 @@
 
     <!--  View number fact screen  -->
     <string name="app_title">We prepare some facts about <font color='#0CA4A5'>numbers</font></string>
+    <string name="app_title_with_count_facts"><![CDATA[We prepare %s facts about <font color=\'#0CA4A5\'>numbers</font>]]></string>
 
     <string name="pull_up_input_number">Pull up if you are <font color='#0CA4A5'>fed up</font> with random facts</string>
     <string name="enter_number_hint">Enter your number</string>

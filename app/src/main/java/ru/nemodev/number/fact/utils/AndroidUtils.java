@@ -36,6 +36,11 @@ public final class AndroidUtils
         return AndroidApplication.getInstance().getResources().getString(resId);
     }
 
+    public static String getString(int resId, Object... params)
+    {
+        return String.format(getString(resId), params);
+    }
+
     public static int getInteger(int resId)
     {
         return AndroidApplication.getInstance().getResources().getInteger(resId);

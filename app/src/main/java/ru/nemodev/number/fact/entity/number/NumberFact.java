@@ -9,6 +9,7 @@ import androidx.room.TypeConverters;
 
 
 // TODO добавить возможность создавать свои факты + добавить фильтрацию по ним
+// TODO добавить лайки
 @Entity(tableName = "numbers_fact",
         indices = {
                 @Index("number")

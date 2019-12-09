@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "363029703130-5op3m055mmoqs7uh629muhaq5ja5aj6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.nemodev.number.fact",
+            "certificate_hash": "e65af8a373f4fb732a75329402da56414a11a2ca"
+          }
+        },
+        {
           "client_id": "363029703130-daqlauq5ab9a80kfp0cfvuipeskto01p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
