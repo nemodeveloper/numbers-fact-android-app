@@ -52,7 +52,7 @@ public class AdsViewModel extends ViewModel implements AdsBanner.OnAdsListener {
         else {
             bannerManager = new BannerManager(activity, Collections.singletonList(
                     new FullscreenBanner(activity, this,
-                            FirebaseConfig.getInteger(AdsConfig.FULLSCREEN_BANNER_SHOW_PERIOD_MIN))
+                            FirebaseConfig.getInteger(AdsConfig.FULLSCREEN_BANNER_SHOW_PERIOD_SEC))
             ));
         }
     }
